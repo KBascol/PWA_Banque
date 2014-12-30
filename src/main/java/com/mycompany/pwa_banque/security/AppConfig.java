@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan({ "com.mycompany.pwa_banque_controller.*" })
+@ComponentScan
 @Import({ SecurityConfig.class })
 public class AppConfig {
  

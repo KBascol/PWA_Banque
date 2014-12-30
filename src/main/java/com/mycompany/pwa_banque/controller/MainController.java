@@ -45,8 +45,7 @@ public class MainController {
 		viewModel.put("username", userDetail.getUsername());
 	  }
           
-	  return "403";
- 
+	  return "403"; 
 	}
  
 }
