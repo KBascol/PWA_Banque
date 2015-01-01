@@ -1,4 +1,4 @@
-package com.mycompany.pwa_banque.controller;
+package com.partOne.controller;
 
 import java.util.Map;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

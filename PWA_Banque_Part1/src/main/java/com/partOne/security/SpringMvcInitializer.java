@@ -1,4 +1,4 @@
-package com.mycompany.pwa_banque.security;
+package com.partOne.security;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -19,6 +19,6 @@ public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServ
  
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/" };
+		return new String[] { "/*" };
 	}
 }

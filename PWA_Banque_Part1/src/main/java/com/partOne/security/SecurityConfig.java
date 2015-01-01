@@ -1,5 +1,5 @@
 
-package com.mycompany.pwa_banque.security;
+package com.partOne.security;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;

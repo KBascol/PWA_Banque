@@ -1,5 +1,5 @@
 
-package com.mycompany.pwa_banque.security;
+package com.partOne.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
  
