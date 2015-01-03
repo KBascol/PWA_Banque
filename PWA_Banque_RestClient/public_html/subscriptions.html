@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html data-ng-app="PWA_project">
+<html>
     <head>
         <title>Abonnements</title>
         <meta charset="UTF-8">
@@ -9,11 +9,17 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
         <script src="includes/subscript.js"></script>
     </head>
-    <body>
-        <div data-ng-include="includes/nav.html" class="container"></div>
-        
+    <body data-ng-app="PWA_project">
+        <ul class="nav nav-tabs nav-justified">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="active"><a href="subscriptions.html">Abonnements</a></li>
+            <li><label for="admin">Mode admin: </label><input type="checkbox" data-ng-model="admin"></li>
+        </ul>
+
         <select data-ng-model="catSelect.category">
             <option data-ng-repeat="cat in categories" value="{{ cat.name }}">{{ cat.name }}</option>
         </select>
@@ -32,13 +38,16 @@
                 <input type="text" data-ng-model="newSub.name">
                 <input type="text" data-ng-model="newSub.duration">
                 <input type="text" data-ng-model="newSub.price">
-                <button data-ng-click="addSubscription()">+</button>            
+                <select data-ng-model="newSub.category">
+                    <option data-ng-repeat="cat in categories" value="{{ cat.name }}">{{ cat.name }}</option>
+                </select>
+                <button data-ng-click="addSubscription()">ajout</button>            
             </div>
             
             <div>
                 <h4>Categorie</h4>
                 <input type="text" data-ng-model="newCat.name">
-                <button data-ng-click="addCategory()">+</button> 
+                <button data-ng-click="addCategory()">ajout</button> 
             </div>
         </div>
     </body>

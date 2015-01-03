@@ -1,4 +1,4 @@
-var app = angular.module("PWA_project", []); 
+var app = angular.module("PWA_project", ["ngResource", "ngRoute"]); 
 
 app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/Abonnements', {
@@ -11,7 +11,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
     }]);
 
-app.controller("subController", ['$scope', '$resource', function ($scope, $resource) {
+app.controller("subController", ['$scope', '$resource', function ($scope, $resource) {     
         var Sub = $resource(
                 'http://localhost:8084/PWA_Banque_RestServer/subscriptions/:identifiant',
                 {},
@@ -60,6 +60,5 @@ app.controller("subController", ['$scope', '$resource', function ($scope, $resou
             delCat.$delete(function () {
                 $scope.categories = Cat.query();
             });
-        }      
-        
+        }     
     }]);
