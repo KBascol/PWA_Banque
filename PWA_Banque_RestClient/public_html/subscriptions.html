@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html data-ng-app="PWA_project">
+    <head>
+        <title>Abonnements</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="includes/subscript.js"></script>
+    </head>
+    <body>
+        <div data-ng-include="includes/nav.html" class="container"></div>
+        
+        <select data-ng-model="catSelect.category">
+            <option data-ng-repeat="cat in categories" value="{{ cat.name }}">{{ cat.name }}</option>
+        </select>
+
+        <ul>
+            <li data-ng-repeat="sub in subscriptions | filter:catSelect:strict | orderBy:'name'">
+                Abonnement {{ sub.name }}, {{ sub.price | currency }}. <br> Durée {{ sub.duration }} mois.
+                <button data-ng-click="delSubscription(sub)" data-ng-show="admin">Supprimer</button>
+            </li>
+        </ul>
+        
+        <div data-ng-show="admin">
+            <h3>Ajouts</h3>
+            <div>
+                <h4>Abonnement</h4>
+                <input type="text" data-ng-model="newSub.name">
+                <input type="text" data-ng-model="newSub.duration">
+                <input type="text" data-ng-model="newSub.price">
+                <button data-ng-click="addSubscription()">+</button>            
+            </div>
+            
+            <div>
+                <h4>Categorie</h4>
+                <input type="text" data-ng-model="newCat.name">
+                <button data-ng-click="addCategory()">+</button> 
+            </div>
+        </div>
+    </body>
+</html>
