@@ -7,22 +7,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="includes/style.css">
         
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
         <script src="includes/subscript.js"></script>
     </head>
-    <body data-ng-app="PWA_project">
+    <body data-ng-app="PWA_project" class="container">
         <ul class="nav nav-tabs nav-justified">
             <li><a href="index.html">Accueil</a></li>
             <li class="active"><a href="subscriptions.html">Abonnements</a></li>
-            <li><label for="admin">Mode admin: </label><input type="checkbox" data-ng-model="admin"></li>
         </ul>
-
-        <select data-ng-model="catSelect.category">
-            <option data-ng-repeat="cat in categories" value="{{ cat.name }}">{{ cat.name }}</option>
-        </select>
+            
+        <div class="col-xs-6">
+            <label for="catSearch">Catégorie:</label>
+            <select class="form-control" id="catSearch" data-ng-model="catSelect.category">
+                <option data-ng-repeat="cat in categories" value="{{ cat.name }}">{{ cat.name }}</option>
+            </select>
+        </div>
+        <div class="col-xs-6"> </div>
 
         <ul>
             <li data-ng-repeat="sub in subscriptions | filter:catSelect:strict | orderBy:'name'">
@@ -31,24 +35,43 @@
             </li>
         </ul>
         
+        <div class="row"></div> 
+        
         <div data-ng-show="admin">
             <h3>Ajouts</h3>
-            <div>
-                <h4>Abonnement</h4>
-                <input type="text" data-ng-model="newSub.name">
-                <input type="text" data-ng-model="newSub.duration">
-                <input type="text" data-ng-model="newSub.price">
-                <select data-ng-model="newSub.category">
+            
+            <h4>Abonnement</h4>
+            <div class="col-xs-4"><label for="nameSub">Nom:</label></div>
+            <div class="col-xs-4"><label for="durSub">Durée (mois:)</label></div>
+            <div class="col-xs-4"><label for="priceSub">Prix (euros):</label></div>
+            <br>
+            <div class="col-xs-4"><input type="text" id="nameSub" class="form-control" data-ng-model="newSub.name"></div>
+            <div class="col-xs-4"><input type="text" id="durSub" class="form-control" data-ng-model="newSub.duration"></div>
+            <div class="col-xs-4"><input type="text" id="priceSub" class="form-control" data-ng-model="newSub.price"></div>
+           
+            <div class="col-xs-12"><label for="catSub">Catégorie:</label></div>
+        
+            <div class="col-xs-6">
+                <select class="form-control" id="catSub" data-ng-model="newSub.category">
                     <option data-ng-repeat="cat in categories" value="{{ cat.name }}">{{ cat.name }}</option>
                 </select>
-                <button data-ng-click="addSubscription()">ajout</button>            
+            </div>  
+            <div class="col-xs-6">   
+                <button class="btn btn-default" data-ng-click="addSubscription()">ajout</button>            
             </div>
             
-            <div>
-                <h4>Categorie</h4>
-                <input type="text" data-ng-model="newCat.name">
-                <button data-ng-click="addCategory()">ajout</button> 
+            <div class="row"></div>
+            
+            <h4>Categorie</h4>          
+            <div class="col-xs-12"><label for="nameCat">Nom:</label></div>
+            
+            <div class="col-xs-6">
+                <input type="text" id="nameCat" class="form-control" data-ng-model="newCat.name">
+            </div>  
+            <div class="col-xs-6"> 
+                <button class="btn btn-default" data-ng-click="addCategory()">ajout</button> 
             </div>
         </div>
+        <div class="col-xs-12 admin"><label class="checkbox"><input type="checkbox" data-ng-model="admin"> Mode admin</label></div>
     </body>
 </html>
