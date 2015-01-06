@@ -20,8 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             auth
             .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
-            
+                .withUser("user").password("password").roles("USER").and()
+                .withUser("admin").password("password").roles("ADMIN","USER");
 	  /*auth.jdbcAuthentication().dataSource(dataSource)
 		.usersByUsernameQuery(
 			"select username,password, enabled from users where username=?")
@@ -35,10 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  http
             .authorizeRequests()
                 .antMatchers("/test.jsp").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login")
+                .loginPage("/login.jsp")
                 .permitAll()
                 .and()
             .logout()
