@@ -32,11 +32,4 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/test").setViewName("test");
         registry.addViewController("/login").setViewName("login");
     }
-
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
 }

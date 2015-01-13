@@ -13,6 +13,6 @@ import org.springframework.stereotype.Service;
  * @author bascool
  */
 @Service
-public interface TransactionRepository extends PagingAndSortingRepository<Transaction, String> {
+public interface TransactionRepository extends PagingAndSortingRepository<Transaction, Long> {
     
 }
