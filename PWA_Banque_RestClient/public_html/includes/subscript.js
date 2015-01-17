@@ -11,36 +11,12 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
     }]);
 
-app.controller("subController", ['$scope', '$resource', function ($scope, $resource) {     
-        var Sub = $resource(
-                'http://localhost:8084/PWA_Banque_RestServer/subscriptions/:identifiant',
-                {},
-                {
-                    save: {method: 'PUT'},
-                    delete: {method: 'DELETE', params: {identifiant: '@name'}}
-                }
-        );
-
-        $scope.subscriptions = Sub.query();
-
-        $scope.newsub = new Sub();
-        $scope.addSubscription = function () {
-            $scope.newSub.$save(function (addSub) {
-                $scope.subscriptions.push(addSub);
-            });
-            $scope.newSub = new Sub();
-        };
-
-        $scope.delSubscription = function (delSub) {
-            delSub.$delete(function () {
-                $scope.subscriptions = Sub.query();
-            });
-        }
-        
+app.controller("catController", ['$scope', '$resource', function ($scope, $resource) {     
         var Cat = $resource(
                 'http://localhost:8084/PWA_Banque_RestServer/categories/:identifiant',
                 {},
                 {
+                    query: {method: 'GET'},
                     save: {method: 'PUT'},
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
@@ -60,5 +36,33 @@ app.controller("subController", ['$scope', '$resource', function ($scope, $resou
             delCat.$delete(function () {
                 $scope.categories = Cat.query();
             });
-        }     
+        };   
+}]);
+
+app.controller("subController", ['$scope', '$resource', function ($scope, $resource) {     
+        var Sub = $resource(
+                'http://localhost:8084/PWA_Banque_RestServer/subscriptions/:identifiant',
+                {},
+                {
+                    query: {method: 'GET'},
+                    save: {method: 'PUT'},
+                    delete: {method: 'DELETE', params: {identifiant: '@name'}}
+                }
+        );
+
+        $scope.subscriptions = Sub.query();
+
+        $scope.newsub = new Sub();
+        $scope.addSubscription = function () {
+            $scope.newSub.$save(function (addSub) {
+                $scope.subscriptions.push(addSub);
+            });
+            $scope.newSub = new Sub();
+        };
+
+        $scope.delSubscription = function (delSub) {
+            delSub.$delete(function () {
+                $scope.subscriptions = Sub.query();
+            });
+        };
     }]);
