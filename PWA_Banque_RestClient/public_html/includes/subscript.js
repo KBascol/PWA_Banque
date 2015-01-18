@@ -16,7 +16,7 @@ app.controller("catController", ['$scope', '$resource', function ($scope, $resou
                 'http://localhost:8084/PWA_Banque_RestServer/categories/:identifiant',
                 {},
                 {
-                    query: {method: 'GET'},
+                    query: {method: 'GET', isArray:true},
                     save: {method: 'PUT'},
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
@@ -26,9 +26,7 @@ app.controller("catController", ['$scope', '$resource', function ($scope, $resou
 
         $scope.newCat = new Cat();
         $scope.addCategory = function () {
-            $scope.newCat.$save(function (addCat) {
-                $scope.categories.push(addCat);
-            });
+            $scope.newCat.$save();
             $scope.newCat = new Cat();
         };
 
@@ -44,7 +42,7 @@ app.controller("subController", ['$scope', '$resource', function ($scope, $resou
                 'http://localhost:8084/PWA_Banque_RestServer/subscriptions/:identifiant',
                 {},
                 {
-                    query: {method: 'GET'},
+                    query: {method: 'GET', isArray:true},
                     save: {method: 'PUT'},
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
@@ -54,9 +52,7 @@ app.controller("subController", ['$scope', '$resource', function ($scope, $resou
 
         $scope.newsub = new Sub();
         $scope.addSubscription = function () {
-            $scope.newSub.$save(function (addSub) {
-                $scope.subscriptions.push(addSub);
-            });
+            $scope.newSub.$save();
             $scope.newSub = new Sub();
         };
 
