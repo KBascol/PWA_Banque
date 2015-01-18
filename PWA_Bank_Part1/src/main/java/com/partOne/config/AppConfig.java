@@ -5,6 +5,7 @@
  */
 package com.partOne.config;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,9 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan({ "com.partOne.web.*" })
 @Import({ SecurityConfig.class })
+
 public class AppConfig {
+    
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver
@@ -31,5 +34,5 @@ public class AppConfig {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
- 
+
 }
