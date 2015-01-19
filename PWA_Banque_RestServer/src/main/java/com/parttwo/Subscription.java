@@ -20,8 +20,7 @@ import lombok.Data;
 public class Subscription {
     @Id
     private String name;
-    
-    private String category;
+
     private float price;
     private int duration;
 }

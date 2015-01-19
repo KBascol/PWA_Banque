@@ -18,33 +18,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author bascool
+ * @author Kevin
  */
 
-@RequestMapping("/subscriptions")
+@RequestMapping("/products")
 @RestController
-public class SubscriptionController {
+public class ProductController {
     @Autowired
-    SubscriptionRepo repo;
+    ProductRepo repo;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Subscription> methodeGet() {
+    public List<Product> methodeGet() {
         return repo.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Subscription methodeGetUnElement(@PathVariable("id") String nom) {
+    public Product methodeGetUnElement(@PathVariable("id") String nom) {
         return repo.findOne(nom);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void methodePost(@RequestBody @Valid Subscription newSub) {
-        repo.save(newSub);
+    public void methodePost(@RequestBody @Valid Product newCat) {
+        repo.save(newCat);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void methodePut(@RequestBody @Valid Subscription newSub) {
-        repo.save(newSub);
+    public void methodePut(@RequestBody @Valid Product newCat) {
+        repo.save(newCat);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

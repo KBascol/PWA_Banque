@@ -1,9 +1,9 @@
 var app = angular.module("PWA_project", ["ngResource", "ngRoute"]); 
 
 app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/Abonnements', {
-            templateUrl: 'subscriptions.html',
-            controller: 'subController'
+        $routeProvider.when('/Produits', {
+            templateUrl: 'products.html',
+            controller: 'prodController'
         }).when('/Accueil', {
             templateUrl: 'index.html'
         }).otherwise({
@@ -37,9 +37,9 @@ app.controller("catController", ['$scope', '$resource', function ($scope, $resou
         };   
 }]);
 
-app.controller("subController", ['$scope', '$resource', function ($scope, $resource) {
-        var Sub = $resource(
-                'http://localhost:8084/PWA_Banque_RestServer/subscriptions/:identifiant',
+app.controller("prodController", ['$scope', '$resource', function ($scope, $resource) {
+        var Prod = $resource(
+                'http://localhost:8084/PWA_Banque_RestServer/products/:identifiant',
                 {},
                 {
                     query: {method: 'GET', isArray: true},
@@ -48,17 +48,17 @@ app.controller("subController", ['$scope', '$resource', function ($scope, $resou
                 }
         );
 
-        $scope.subscriptions = Sub.query();
+        $scope.products = Prod.query();
 
-        $scope.newSub = new Sub();
-        $scope.addSubscription = function () {
-            $scope.newSub.$save();
-            $scope.newSub = new Sub();
+        $scope.newProd = new Prod();
+        $scope.addProduct = function () {
+            $scope.newProd.$save();
+            $scope.newProd = new Prod();
         };
 
-        $scope.delSubscription = function (delSub) {
-            delSub.$delete(function () {
-                $scope.subscriptions = Sub.query();
+        $scope.delProduct = function (delProd) {
+            delProd.$delete(function () {
+                $scope.products = Prod.query();
             });
         };
     }]);
