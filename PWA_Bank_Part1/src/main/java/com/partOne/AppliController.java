@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author Kevin
  */
-
+/*
 @Controller
 public class AppliController {
     @Autowired
@@ -27,3 +27,4 @@ public class AppliController {
         return "listTrans";
     }
 }
+*/
