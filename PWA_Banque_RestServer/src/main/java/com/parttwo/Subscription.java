@@ -22,11 +22,21 @@ public class Subscription {
     private String name;
 
     private float price;
-    private int duration;
-
-    Subscription(String newSubName, Float newSubPrice, int newSubDuration) {
+    private Integer duration;
+    
+    public Subscription(){
+        
+    }
+    
+    public Subscription(String newSubName, Float newSubPrice, Integer newSubDuration) {
         this.name = newSubName;
         this.price = newSubPrice;
         this.duration = newSubDuration;
+    }
+    
+    public Subscription(Subscription sub){   
+        this.name = sub.name;
+        this.price = sub.price;
+        this.duration = sub.duration;
     }
 }

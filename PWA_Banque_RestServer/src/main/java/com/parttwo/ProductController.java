@@ -26,6 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     @Autowired
     ProductRepo repo;
+    
+    @Autowired
+    SubscriptionRepo subsRepo;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> methodeGet() {
@@ -43,14 +46,11 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public void methodePut(@PathVariable("id") String nom, String newSubName, Float newSubPrice, int newSubDuration, Boolean del) {
-        Subscription sub = new Subscription(newSubName, newSubPrice, newSubDuration);
-        if(del){
-            repo.findOne(nom).getSubs().remove(sub);
-        }
-        else{
-            repo.findOne(nom).getSubs().add(sub);
-        }    
+    public void methodePut(@PathVariable("id") String nom, Subscription sub) {
+        Product prod = repo.findOne(nom);
+        subsRepo.save(sub);
+        prod.getSubs().add(sub);
+        repo.save(prod);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
