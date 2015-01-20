@@ -28,6 +28,7 @@ app.controller("catController", ['$scope', '$resource', function ($scope, $resou
         $scope.addCategory = function () {
             $scope.newCat.$save();
             $scope.newCat = new Cat();
+            $scope.categories = Cat.query();
         };
 
         $scope.delCategory = function (delCat) {
@@ -43,10 +44,17 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
                 {},
                 {
                     query: {method: 'GET', isArray: true},
-                    save: {method: 'PUT'},
+                    save: {method: 'POST'},
+                    update: {method: 'PUT', params: {identifiant: '@name'}},
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
         );
+
+        function Subscription() {
+            this.name;
+            this.price;
+            this.duration;     
+        }
 
         $scope.products = Prod.query();
 
@@ -54,6 +62,21 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         $scope.addProduct = function () {
             $scope.newProd.$save();
             $scope.newProd = new Prod();
+            
+            $scope.products = Prod.query();
+        };
+        
+
+        $scope.sub = new Subscription();
+        
+        $scope.addSub = function (prod) {
+            prod.$update($scope.sub, false);
+            
+            $scope.sub = new Subscription();
+        };
+
+        $scope.delSub = function (prod, delSub) {
+            prod.$update(delSub, true);
         };
 
         $scope.delProduct = function (delProd) {

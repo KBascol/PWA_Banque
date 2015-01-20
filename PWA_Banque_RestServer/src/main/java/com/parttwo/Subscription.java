@@ -23,4 +23,10 @@ public class Subscription {
 
     private float price;
     private int duration;
+
+    Subscription(String newSubName, Float newSubPrice, int newSubDuration) {
+        this.name = newSubName;
+        this.price = newSubPrice;
+        this.duration = newSubDuration;
+    }
 }

@@ -38,13 +38,19 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void methodePost(@RequestBody @Valid Product newCat) {
-        repo.save(newCat);
+    public void methodePost(@RequestBody @Valid Product newProd) {
+        repo.save(newProd);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public void methodePut(@RequestBody @Valid Product newCat) {
-        repo.save(newCat);
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public void methodePut(@PathVariable("id") String nom, String newSubName, Float newSubPrice, int newSubDuration, Boolean del) {
+        Subscription sub = new Subscription(newSubName, newSubPrice, newSubDuration);
+        if(del){
+            repo.findOne(nom).getSubs().remove(sub);
+        }
+        else{
+            repo.findOne(nom).getSubs().add(sub);
+        }    
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
