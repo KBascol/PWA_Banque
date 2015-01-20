@@ -40,12 +40,13 @@ app.controller("catController", ['$scope', '$resource', function ($scope, $resou
 
 app.controller("prodController", ['$scope', '$resource', function ($scope, $resource) {
         var Prod = $resource(
-                'http://localhost:8084/PWA_Banque_RestServer/products/:identifiant',
+                'http://localhost:8084/PWA_Banque_RestServer/products/:identifiant/:mode',
                 {},
                 {
                     query: {method: 'GET', isArray: true},
                     save: {method: 'POST'},
-                    update: {method: 'PUT', params: {identifiant: '@name'}},
+                    addSub: {method: 'PUT', params: {identifiant: '@name', mode: 'add'}},
+                    delSub: {method: 'PUT', params: {identifiant: '@name', mode: 'del'}},
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
         );
@@ -71,10 +72,14 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         $scope.sub = new Subscription();
         
         $scope.addSub = function (prod) {
-            prod.$update($scope.sub);
+            prod.$addSub($scope.sub);
             
             $scope.sub = new Subscription();
         };
+        
+        $scope.delSub = function (prod, sub) {
+            prod.$delSub(sub);
+        };      
 
         $scope.delProduct = function (delProd) {
             delProd.$delete(function () {

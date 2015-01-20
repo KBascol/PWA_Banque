@@ -45,12 +45,20 @@ public class ProductController {
         repo.save(newProd);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/add", method = RequestMethod.PUT)
     public void methodePut(@PathVariable("id") String nom, Subscription sub) {
         Product prod = repo.findOne(nom);
         subsRepo.save(sub);
         prod.getSubs().add(sub);
         repo.save(prod);
+    }
+    
+    @RequestMapping(value = "/{id}/del", method = RequestMethod.PUT)   
+    public void delSub(@PathVariable("id") String nom, Subscription sub) {
+        Product prod = repo.findOne(nom);
+        prod.getSubs().remove(sub);
+        repo.save(prod);
+        subsRepo.delete(sub);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
