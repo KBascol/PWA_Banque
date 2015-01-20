@@ -29,6 +29,9 @@ public class ProductController {
     
     @Autowired
     SubscriptionRepo subsRepo;
+    
+    @Autowired
+    OrderRepo ordsRepo;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> methodeGet() {
@@ -61,7 +64,11 @@ public class ProductController {
         subsRepo.delete(sub);
     }
     
-    
+    @RequestMapping(value = "/{id}/ord", method = RequestMethod.PUT)   
+    public void addOrder(@PathVariable("id") String nom, Order ord) {
+        System.out.println(ord);
+        ordsRepo.save(ord);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Boolean> methodeDelete(@PathVariable("id") String nom) {

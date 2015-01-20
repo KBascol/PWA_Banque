@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Data;
 
 /**
@@ -19,6 +20,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@Table(name="ProdOrder")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,10 +29,10 @@ public class Order implements Serializable {
     private String FirstName;
     private String LastName;
     private String email;
-    private String IBAN;
+    private String iban;
     
     private String sub;
     
-    private Date start;
-    private Date end;
+   /* private Date start;
+    private Date end;*/
 }

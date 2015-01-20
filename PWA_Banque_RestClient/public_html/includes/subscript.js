@@ -59,22 +59,20 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         }
         
         function Order() {
-            this.orderNum;
             this.firstName;
             this.lastName;
             this.email;
             this.iban;
             this.sub;
-            this.start;
-            this.end;
+            /*this.start;
+            this.end;*/
         }
-
-        $scope.products = Prod.query();
-        $scope.formOrd = false;
         
-        $scope.toggleOrder = function(){
-            $scope.formOrd = !$scope.formOrd;
-        };
+        $('#formOrd').modal({
+          backdrop: false
+        });
+        
+        $scope.products = Prod.query();
 
         $scope.newSub = new Subscription();
         $scope.newProd = new Prod();
@@ -104,12 +102,16 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         };
         
         $scope.newOrder = new Order();
-        $scope.addOrder = function (prod, sub) {
-            $scope.newOrder.sub = sub.name;
-            $scope.newOrder.start = new Date();
-            $scope.newOrder.end = new Date($scope.newOrder.start.getTime()+(2592000000*sub.duration));
+        $scope.setOrder = function(prod, sub){
+            $scope.subOrder = sub;
+            $scope.prodOrder = prod;
+        };
+        
+        $scope.addOrder = function (prod) {
+            $scope.newOrder.sub = $scope.subOrder.name;
+            /*$scope.newOrder.start = new Date();
+            $scope.newOrder.end = new Date($scope.newOrder.start.getTime()+(2592000000*$scope.subOrder.duration));*/
             prod.$addOrder($scope.newOrder);
-            
-            $scope.sub = new Subscription();
+            $scope.newOrder = new Order();
         };
     }]);
