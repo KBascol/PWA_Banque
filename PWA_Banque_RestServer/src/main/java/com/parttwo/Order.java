@@ -32,7 +32,4 @@ public class Order implements Serializable {
     private String iban;
     
     private String sub;
-    
-   /* private Date start;
-    private Date end;*/
 }

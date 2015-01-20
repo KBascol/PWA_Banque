@@ -52,6 +52,8 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
                 }
         );
 
+        var regexEmail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+        
         function Subscription() {
             this.name;
             this.price;
@@ -64,12 +66,12 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
             this.email;
             this.iban;
             this.sub;
-            /*this.start;
-            this.end;*/
         }
         
         $('#formOrd').modal({
-          backdrop: false
+          backdrop: false,
+          keyboard: true,
+          show: false
         });
         
         $scope.products = Prod.query();
@@ -109,9 +111,17 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         
         $scope.addOrder = function (prod) {
             $scope.newOrder.sub = $scope.subOrder.name;
-            /*$scope.newOrder.start = new Date();
-            $scope.newOrder.end = new Date($scope.newOrder.start.getTime()+(2592000000*$scope.subOrder.duration));*/
-            prod.$addOrder($scope.newOrder);
+            if($scope.newOrder.firstName === null || $scope.newOrder.lastName === null || $scope.newOrder.email === null || $scope.newOrder.iban === null || $scope.newOrder.sub === null){
+                if (regexEmail.test($scope.newOrder.email)) {
+                    prod.$addOrder($scope.newOrder);
+                }
+                else {
+                    alert("Adresse mail invalide.");
+                }
+            }
+            else{
+                alert("Paramètre manquant");
+            }
             $scope.newOrder = new Order();
         };
     }]);
