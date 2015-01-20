@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class appController {
     
     @Autowired
-    private TransactionDao transRepo;
+    TransactionDao transRepo;
                  
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
