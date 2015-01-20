@@ -47,6 +47,7 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
                     save: {method: 'POST'},
                     addSub: {method: 'PUT', params: {identifiant: '@name', mode: 'add'}},
                     delSub: {method: 'PUT', params: {identifiant: '@name', mode: 'del'}},
+                    addOrder: {method: 'PUT', params: {identifiant: '@name', mode: 'ord'}},
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
         );
@@ -56,9 +57,25 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
             this.price;
             this.duration;
         }
+        
+        function Order() {
+            this.orderNum;
+            this.firstName;
+            this.lastName;
+            this.email;
+            this.iban;
+            this.sub;
+            this.start;
+            this.end;
+        }
 
         $scope.products = Prod.query();
+        $scope.formOrd = false;
         
+        $scope.toggleOrder = function(){
+            $scope.formOrd = !$scope.formOrd;
+        };
+
         $scope.newSub = new Subscription();
         $scope.newProd = new Prod();
         $scope.addProduct = function () {
@@ -66,7 +83,6 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
             
             $scope.newProd = new Prod();
             $scope.newSub = new Subscription();
-            $scope.products = Prod.query();
         };
        
         $scope.sub = new Subscription();
@@ -85,5 +101,15 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
             delProd.$delete(function () {
                 $scope.products = Prod.query();
             });
+        };
+        
+        $scope.newOrder = new Order();
+        $scope.addOrder = function (prod, sub) {
+            $scope.newOrder.sub = sub.name;
+            $scope.newOrder.start = new Date();
+            $scope.newOrder.end = new Date($scope.newOrder.start.getTime()+(2592000000*sub.duration));
+            prod.$addOrder($scope.newOrder);
+            
+            $scope.sub = new Subscription();
         };
     }]);

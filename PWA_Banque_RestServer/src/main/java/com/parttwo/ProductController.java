@@ -46,7 +46,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/{id}/add", method = RequestMethod.PUT)
-    public void methodePut(@PathVariable("id") String nom, Subscription sub) {
+    public void addSub(@PathVariable("id") String nom, Subscription sub) {
         Product prod = repo.findOne(nom);
         subsRepo.save(sub);
         prod.getSubs().add(sub);
@@ -60,6 +60,8 @@ public class ProductController {
         repo.save(prod);
         subsRepo.delete(sub);
     }
+    
+    
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Boolean> methodeDelete(@PathVariable("id") String nom) {
