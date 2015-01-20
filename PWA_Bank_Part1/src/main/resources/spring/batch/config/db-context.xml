@@ -21,7 +21,7 @@
 	</bean>
 
 	<!-- Entity Manager configurations -->
-	<bean id="bankEntityManagerFactory"
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="jpaVendorAdapter" ref="jpaAdapter" />
 		<property name="persistenceUnitName" value="bank-unit" />
