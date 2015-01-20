@@ -8,7 +8,7 @@
     <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
     </form>
-    <a href="home">Accueil</a>
-    <a href="Liste">Liste</a>
-    <a href="reasearch.jsp">Recherche</a>
+    <a href="">Accueil</a>
+    <a href="List">Liste</a>
+    <a href="Research">Recherche</a>
 </div>

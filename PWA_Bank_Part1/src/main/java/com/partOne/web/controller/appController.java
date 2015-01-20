@@ -32,4 +32,15 @@ public class appController {
 		return model;
  
 	} 
+        
+        @RequestMapping(value="/List", method = RequestMethod.GET)
+        public String listPage() {
+            return "listTrans";
+        }
+        
+        @RequestMapping(value="/Research", method = RequestMethod.GET)
+        public String searchPage() {
+            return "research";
+        }
+        
 }
