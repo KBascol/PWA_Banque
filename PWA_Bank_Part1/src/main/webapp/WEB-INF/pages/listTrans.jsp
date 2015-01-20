@@ -11,7 +11,7 @@
         <h1>Liste des transactions</h1>
         <ul>
             <c:forEach var="trans" items="${transactions}">
-                <li></li>
+                <li>${trans.amout}</li>
             </c:forEach>
         </ul>
 
