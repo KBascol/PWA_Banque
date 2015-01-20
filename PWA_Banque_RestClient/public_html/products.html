@@ -24,6 +24,7 @@
             <div class="col-xs-6">
                 <label for="catSearch">Catégorie:</label>
                 <select class="form-control" id="catSearch" data-ng-model="catSelect.category">
+                    <option value="">Tout</option>
                     <option data-ng-repeat="cat in categories" value="{{ cat.name}}">{{ cat.name}}</option>
                 </select>
             </div>
@@ -47,17 +48,39 @@
         <div data-ng-controller="prodController" class="container">
             <ul>
                 <li data-ng-repeat="prod in products| filter:catSelect:strict | orderBy:'name'">
-                    <div class="col-xs-12">
-                        <div class="abo col-xs-12">{{ prod.name}}.</div>
-                        <div class="col-xs-6">
+                    <div class="abo col-xs-12">
+                        <div class="col-xs-8">{{ prod.name}}.</div>
+                        <div class="col-xs-4">
+                                <button data-ng-click="delProduct(prod)" class="btn btn-default" data-ng-show="admin">Supprimer</button>
+                        </div>
+                        <div>
                             <ul>
-                                <li  data-ng-repeat="sub in prod.subs | orderBy:'duration'">
-                                    Abonnement {{ sub.name }} <br>
-                                    Durée {{ sub.duration}} mois, {{sub.price | currency:'€ ' }}
+                                <li  data-ng-repeat="sub in prod.subs | orderBy:'duration'" class="abo col-xs-12">
+                                    <div class="col-xs-6">
+                                        Abonnement {{ sub.name }} <br>
+                                        Durée {{ sub.duration}} mois, {{sub.price}} €.
+                                    </div>
+                                    <div class="col-xs-6" data-ng-show="admin">
+                                        <button class="btn btn-default" data-ng-click="delSub(prod, sub)">supprimer</button> 
+                                    </div>
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-xs-6"><button data-ng-click="delProduct(prod)" class="btn btn-default" data-ng-show="admin">Supprimer</button></div>  
+                        
+                        <div class="col-xs-12" data-ng-show="admin">
+                            <h5>Ajout abonnement: </h5>
+                            <div class="col-xs-4"><label for="nameSub">Nom:</label></div>
+                            <div class="col-xs-4"><label for="durSub">Durée (mois:)</label></div>
+                            <div class="col-xs-4"><label for="priceSub">Prix (euros):</label></div>
+                            <br>
+                            <div class="col-xs-4"><input type="text" id="nameSub" class="form-control" data-ng-model="sub.name"></div>
+                            <div class="col-xs-4"><input type="text" id="durSub" class="form-control" data-ng-model="sub.duration"></div>
+                            <div class="col-xs-4"><input type="text" id="priceSub" class="form-control" data-ng-model="sub.price"></div>
+                            
+                            <div class="col-xs-12">   
+                                <button class="btn btn-default" data-ng-click="addSub(prod)">ajout</button>            
+                            </div>
+                        </div>
                     </div>
                 </li>
                 <li>

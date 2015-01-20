@@ -53,30 +53,27 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         function Subscription() {
             this.name;
             this.price;
-            this.duration;     
+            this.duration;
         }
 
         $scope.products = Prod.query();
-
+        
+        $scope.newSub = new Subscription();
         $scope.newProd = new Prod();
         $scope.addProduct = function () {
             $scope.newProd.$save();
-            $scope.newProd = new Prod();
             
+            $scope.newProd = new Prod();
+            $scope.newSub = new Subscription();
             $scope.products = Prod.query();
         };
-        
-
+       
         $scope.sub = new Subscription();
         
         $scope.addSub = function (prod) {
-            prod.$update($scope.sub, false);
+            prod.$update($scope.sub);
             
             $scope.sub = new Subscription();
-        };
-
-        $scope.delSub = function (prod, delSub) {
-            prod.$update(delSub, true);
         };
 
         $scope.delProduct = function (delProd) {
