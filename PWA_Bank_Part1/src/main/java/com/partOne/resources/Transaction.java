@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ *
+ * @author kaldoran
+ */
+
 @Entity
 public class Transaction implements Serializable {
 

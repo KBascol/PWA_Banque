@@ -1,7 +1,7 @@
 <%-- 
     Document   : login
     Created on : 5 janv. 2015, 19:05:51
-    Author     : bascool
+    Author     : kaldoran
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

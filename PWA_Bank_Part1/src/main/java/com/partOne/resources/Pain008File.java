@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author kevin
+ * @author kaldoran
  */
 @Entity
 public class Pain008File implements Serializable {

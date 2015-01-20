@@ -11,13 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author kaldoran
  */
+
 @Controller
 public class appController {
     
     @Autowired
     private TransactionRepository transRepo;
-                
-                
+                 
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
  
