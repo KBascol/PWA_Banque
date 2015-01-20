@@ -40,24 +40,42 @@ app.controller("catController", ['$scope', '$resource', function ($scope, $resou
 
 app.controller("prodController", ['$scope', '$resource', function ($scope, $resource) {
         var Prod = $resource(
-                'http://localhost:8084/PWA_Banque_RestServer/products/:identifiant',
+                'http://localhost:8084/PWA_Banque_RestServer/products/:identifiant/:mode',
                 {},
                 {
                     query: {method: 'GET', isArray: true},
                     save: {method: 'POST'},
-                    update: {method: 'PUT', params: {identifiant: '@name'}},
+                    addSub: {method: 'PUT', params: {identifiant: '@name', mode: 'add'}},
+                    delSub: {method: 'PUT', params: {identifiant: '@name', mode: 'del'}},
+                    addOrder: {method: 'PUT', params: {identifiant: '@name', mode: 'ord'}},
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
         );
 
+        var regexEmail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+        
         function Subscription() {
             this.name;
             this.price;
             this.duration;
         }
-
-        $scope.products = Prod.query();
         
+        function Order() {
+            this.firstName;
+            this.lastName;
+            this.email;
+            this.iban;
+            this.sub;
+        }
+        
+        $('#formOrd').modal({
+          backdrop: false,
+          keyboard: true,
+          show: false
+        });
+        
+        $scope.products = Prod.query();
+
         $scope.newSub = new Subscription();
         $scope.newProd = new Prod();
         $scope.addProduct = function () {
@@ -65,20 +83,45 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
             
             $scope.newProd = new Prod();
             $scope.newSub = new Subscription();
-            $scope.products = Prod.query();
         };
        
         $scope.sub = new Subscription();
         
         $scope.addSub = function (prod) {
-            prod.$update($scope.sub);
+            prod.$addSub($scope.sub);
             
             $scope.sub = new Subscription();
         };
+        
+        $scope.delSub = function (prod, sub) {
+            prod.$delSub(sub);
+        };      
 
         $scope.delProduct = function (delProd) {
             delProd.$delete(function () {
                 $scope.products = Prod.query();
             });
+        };
+        
+        $scope.newOrder = new Order();
+        $scope.setOrder = function(prod, sub){
+            $scope.subOrder = sub;
+            $scope.prodOrder = prod;
+        };
+        
+        $scope.addOrder = function (prod) {
+            $scope.newOrder.sub = $scope.subOrder.name;
+            if($scope.newOrder.firstName === null || $scope.newOrder.lastName === null || $scope.newOrder.email === null || $scope.newOrder.iban === null || $scope.newOrder.sub === null){
+                if (regexEmail.test($scope.newOrder.email)) {
+                    prod.$addOrder($scope.newOrder);
+                }
+                else {
+                    alert("Adresse mail invalide.");
+                }
+            }
+            else{
+                alert("Paramètre manquant");
+            }
+            $scope.newOrder = new Order();
         };
     }]);

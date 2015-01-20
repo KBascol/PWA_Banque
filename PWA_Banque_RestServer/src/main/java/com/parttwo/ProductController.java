@@ -29,6 +29,9 @@ public class ProductController {
     
     @Autowired
     SubscriptionRepo subsRepo;
+    
+    @Autowired
+    OrderRepo ordsRepo;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> methodeGet() {
@@ -45,12 +48,26 @@ public class ProductController {
         repo.save(newProd);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public void methodePut(@PathVariable("id") String nom, Subscription sub) {
+    @RequestMapping(value = "/{id}/add", method = RequestMethod.PUT)
+    public void addSub(@PathVariable("id") String nom, Subscription sub) {
         Product prod = repo.findOne(nom);
         subsRepo.save(sub);
         prod.getSubs().add(sub);
         repo.save(prod);
+    }
+    
+    @RequestMapping(value = "/{id}/del", method = RequestMethod.PUT)   
+    public void delSub(@PathVariable("id") String nom, Subscription sub) {
+        Product prod = repo.findOne(nom);
+        prod.getSubs().remove(sub);
+        repo.save(prod);
+        subsRepo.delete(sub);
+    }
+    
+    @RequestMapping(value = "/{id}/ord", method = RequestMethod.PUT)   
+    public void addOrder(@PathVariable("id") String nom, Order ord) {
+        System.out.println(ord);
+        ordsRepo.save(ord);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
