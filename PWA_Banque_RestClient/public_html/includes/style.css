@@ -28,3 +28,13 @@ div {
 .admin {
     text-align: right;
 }
+
+ul {
+    list-style: none;
+}
+
+.abo {
+    border: 1px black solid;
+    padding: 2px;
+    margin: 2px;
+}

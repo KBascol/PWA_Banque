@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author bascool
+ * @author Kevin
  */
-public interface SubscriptionRepo extends JpaRepository<Subscription, String> {
+public interface ProductRepo  extends JpaRepository<Product, String> {
     
 }

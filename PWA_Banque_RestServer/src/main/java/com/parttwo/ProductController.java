@@ -18,33 +18,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author bascool
+ * @author Kevin
  */
 
-@RequestMapping("/subscriptions")
+@RequestMapping("/products")
 @RestController
-public class SubscriptionController {
+public class ProductController {
     @Autowired
-    SubscriptionRepo repo;
+    ProductRepo repo;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Subscription> methodeGet() {
+    public List<Product> methodeGet() {
         return repo.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Subscription methodeGetUnElement(@PathVariable("id") String nom) {
+    public Product methodeGetUnElement(@PathVariable("id") String nom) {
         return repo.findOne(nom);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void methodePost(@RequestBody @Valid Subscription newSub) {
-        repo.save(newSub);
+    public void methodePost(@RequestBody @Valid Product newProd) {
+        repo.save(newProd);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public void methodePut(@RequestBody @Valid Subscription newSub) {
-        repo.save(newSub);
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public void methodePut(@PathVariable("id") String nom, String newSubName, Float newSubPrice, int newSubDuration, Boolean del) {
+        Subscription sub = new Subscription(newSubName, newSubPrice, newSubDuration);
+        if(del){
+            repo.findOne(nom).getSubs().remove(sub);
+        }
+        else{
+            repo.findOne(nom).getSubs().add(sub);
+        }    
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
