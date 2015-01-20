@@ -16,126 +16,136 @@
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
         <script src="includes/subscript.js"></script>
     </head>
-    <body data-ng-app="PWA_project" data-ng-controller="catController" class="container">
-        <ul class="nav nav-tabs nav-justified">
-            <li><a href="index.html">Accueil</a></li>
-            <li class="active"><a href="products.html">Abonnements</a></li>
-        </ul>
+    <body data-ng-app="PWA_project" data-ng-controller="catController">
+        
+        <h1 class="text-center"><u>Knk Media</u></h1>
+        
+        <div id="container" class="col-xs-12">
+            <ul class="nav nav-tabs nav-justified">
+                <li><a href="index.html">Accueil</a></li>
+                <li class="active"><a href="products.html">Abonnements</a></li>
+            </ul>
 
-        <div>
-            <div class="col-xs-6">
-                <label for="catSearch">Catégorie:</label>
-                <select class="form-control" id="catSearch" data-ng-model="catSelect.category">
-                    <option value="">Tout</option>
-                    <option data-ng-repeat="cat in categories" value="{{ cat.name}}">{{ cat.name}}</option>
-                </select>
-            </div>
-            <div class="col-xs-6"> </div>
-
-            <div data-ng-show="admin" class="col-xs-12">
-                <h4>Ajout categorie</h4>          
-                <div class="col-xs-12"><label for="nameCat">Nom:</label></div>
-
+            <div>
                 <div class="col-xs-6">
-                    <input type="text" id="nameCat" class="form-control" data-ng-model="newCat.name">
-                </div>  
-                <div class="col-xs-6"> 
-                    <button class="btn btn-default" data-ng-click="addCategory()">ajout</button> 
-                </div>   
-            </div>    
-        </div>
-
-        <div class="row"></div> 
-
-        <div data-ng-controller="prodController" class="container">
-            <div class="modal fade" id="formOrd" tabindex="-1" role="dialog" aria-labelledby="formTitle" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="formTitle">Souscrire à l'abonnement {{ subOrder.name }} de {{ prodOrder.name }}</h4>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <div><label for="lNameOrd">Nom:</label></div>
-                            <div><input type="text" id="lNameOrd" class="form-control" data-ng-model="newOrder.lastName"></div>
-                            <div><label for="fNameOrd">Prénom:</label></div>
-                            <div><input type="text" id="fNameOrd" class="form-control" data-ng-model="newOrder.firstName"></div>
-                            <div><label for="mailOrd">Email:</label></div>
-                            <div><input type="text" id="mailOrd" class="form-control" data-ng-model="newOrder.email"></div>
-                            <div><label for="ibanOrd">IBAN:</label></div>
-                            <div><input type="text" id="ibanOrd" class="form-control" data-ng-model="newOrder.iban"></div>                
-                        </div>
-                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary" data-ng-click="addOrder(prodOrder)">Souscrire</button>
-                        </div>
-                    </div>
+                    <label for="catSearch">Catégorie:</label>
+                    <select class="form-control" id="catSearch" data-ng-model="catSelect.category">
+                        <option value="">Tout</option>
+                        <option data-ng-repeat="cat in categories" value="{{ cat.name}}">{{ cat.name}}</option>
+                    </select>
                 </div>
+                <div class="col-xs-6"> </div>
+
+                <div data-ng-show="admin" class="col-xs-12">
+                    <h4>Ajout categorie</h4>          
+                    <div class="col-xs-12"><label for="nameCat">Nom:</label></div>
+
+                    <div class="col-xs-6">
+                        <input type="text" id="nameCat" class="form-control" data-ng-model="newCat.name">
+                    </div>  
+                    <div class="col-xs-6"> 
+                        <button class="btn btn-default" data-ng-click="addCategory()">ajout</button> 
+                    </div>   
+                </div>    
             </div>
 
-            <ul>
-                <li data-ng-repeat="prod in products| filter:catSelect:strict | orderBy:'name'">
-                    <div class="abo col-xs-12">
-                        <div class="col-xs-8">{{ prod.name}}.</div>
-                        <div class="col-xs-4">
-                                <button data-ng-click="delProduct(prod)" class="btn btn-default" data-ng-show="admin">Supprimer</button>
-                        </div>
-                        <div>
-                            <ul>
-                                <li  data-ng-repeat="sub in prod.subs | orderBy:'duration'" class="abo col-xs-12">
-                                    <div class="col-xs-8">
-                                        Abonnement {{ sub.name }} <br>
-                                        Durée {{ sub.duration}} mois, {{sub.price}} €.
-                                    </div>
-                                    <div class="col-xs-4">
-                                         <button class="btn btn-default" data-toggle="modal" data-target="#formOrd" data-ng-click="setOrder(prod, sub)">Souscrire</button>
-                                        <button class="btn btn-default" data-ng-show="admin" data-ng-click="delSub(prod, sub)">Supprimer</button>
-                                    </div>
-                                    
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="col-xs-12" data-ng-show="admin">
-                            <h5>Ajout abonnement: </h5>
-                            <div class="col-xs-4"><label for="nameSub">Nom:</label></div>
-                            <div class="col-xs-4"><label for="durSub">Durée (mois:)</label></div>
-                            <div class="col-xs-4"><label for="priceSub">Prix (euros):</label></div>
-                            <br>
-                            <div class="col-xs-4"><input type="text" id="nameSub" class="form-control" data-ng-model="sub.name"></div>
-                            <div class="col-xs-4"><input type="text" id="durSub" class="form-control" data-ng-model="sub.duration"></div>
-                            <div class="col-xs-4"><input type="text" id="priceSub" class="form-control" data-ng-model="sub.price"></div>
-                            
-                            <div class="col-xs-12">   
-                                <button class="btn btn-default" data-ng-click="addSub(prod)">Ajout</button>            
+            <div class="row"></div> 
+
+            <div data-ng-controller="prodController">
+                <div class="modal fade" id="formOrd" tabindex="-1" role="dialog" aria-labelledby="formTitle" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="formTitle">Souscrire à l'abonnement {{ subOrder.name }} de {{ prodOrder.name }}</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <div><label for="lNameOrd">Nom:</label></div>
+                                <div><input type="text" id="lNameOrd" class="form-control" data-ng-model="newOrder.lastName"></div>
+                                <div><label for="fNameOrd">Prénom:</label></div>
+                                <div><input type="text" id="fNameOrd" class="form-control" data-ng-model="newOrder.firstName"></div>
+                                <div><label for="mailOrd">Email:</label></div>
+                                <div><input type="text" id="mailOrd" class="form-control" data-ng-model="newOrder.email"></div>
+                                <div><label for="ibanOrd">IBAN:</label></div>
+                                <div><input type="text" id="ibanOrd" class="form-control" data-ng-model="newOrder.iban"></div>                
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                <button type="button" class="btn btn-primary" data-ng-click="addOrder(prodOrder)">Souscrire</button>
                             </div>
                         </div>
                     </div>
-                </li>
-                <li>
-                    <div data-ng-show="admin">
-                        <h4>Ajout produit</h4>
-                        <div class="col-xs-12"><label for="nameProd">Produit:</label></div>
-                        <div class="col-xs-12"><input type="text" id="nameProd" class="form-control" data-ng-model="newProd.name"></div>
+                </div>
 
-                        <div class="col-xs-12"><label for="catSub">Catégorie:</label></div>
+                <ul class="products">
+                    <li data-ng-repeat="prod in products| filter:catSelect:strict | orderBy:'name'">
+                        <div class="abo col-xs-12">
+                            <div class="col-xs-8">{{ prod.name}}.</div>
+                            <div class="col-xs-4">
+                                <button data-ng-click="delProduct(prod)" class="btn btn-default" data-ng-show="admin">Supprimer</button>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li data-ng-repeat="sub in prod.subs| orderBy:'duration'" class="abo col-xs-12">
+                                        <div class="col-xs-8">
+                                            <dl>
+                                                <dt>Abonnement {{ sub.name}}</dt>
+                                                <dd>Durée {{ sub.duration}} mois, {{sub.price}} €.</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#formOrd" data-ng-click="setOrder(prod, sub)">Souscrire</button>
+                                            <button class="btn btn-default" data-ng-show="admin" data-ng-click="delSub(prod, sub)">Supprimer</button>
+                                        </div>
 
-                        <div class="col-xs-6">
-                            <select class="form-control" id="catSub" data-ng-model="newProd.category">
-                                <option data-ng-repeat="cat in categories" value="{{ cat.name}}">{{ cat.name}}</option>
-                            </select>
-                        </div>  
-                        <div class="col-xs-6">   
-                            <button class="btn btn-default" data-ng-click="addProduct()">Ajout</button>            
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="col-xs-12" data-ng-show="admin">
+                                
+                                <h5>Ajout abonnement: </h5>
+                                <div class="col-xs-4"><label for="nameSub">Nom:</label></div>
+                                <div class="col-xs-4"><label for="durSub">Durée (mois:)</label></div>
+                                <div class="col-xs-4"><label for="priceSub">Prix (euros):</label></div>
+                                <br>
+                                <div class="col-xs-4"><input type="text" id="nameSub_{{prod.name}}" class="form-control" data-ng-model="sub.name"></div>
+                                <div class="col-xs-4"><input type="text" id="durSub_{{prod.name}}" class="form-control" data-ng-model="sub.duration"></div>
+                                <div class="col-xs-4"><input type="text" id="priceSub_{{prod.name}}" class="form-control" data-ng-model="sub.price"></div>
+
+                                <div class="col-xs-12">   
+                                    <button class="btn btn-default" data-ng-click="addSub(prod)">Ajout</button>            
+                                </div>
+
+                                <div class="col-xs-12">  <hr> </div>
+
+                            </div>
+                    </li>
+                    <li>
+                        <div data-ng-show="admin">
+                            <h4>Ajout produit</h4>
+                            <div class="col-xs-12"><label for="nameProd">Produit:</label></div>
+                            <div class="col-xs-12"><input type="text" id="nameProd" class="form-control" data-ng-model="newProd.name"></div>
+
+                            <div class="col-xs-12"><label for="catSub">Catégorie:</label></div>
+
+                            <div class="col-xs-6">
+                                <select class="form-control" id="catSub" data-ng-model="newProd.category">
+                                    <option data-ng-repeat="cat in categories" value="{{ cat.name}}">{{ cat.name}}</option>
+                                </select>
+                            </div>  
+                            <div class="col-xs-6">   
+                                <button class="btn btn-default" data-ng-click="addProduct()">Ajout</button>            
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>        
+                    </li>
+                </ul>        
+            </div>
+
+            <div class="row"></div> 
+
+            <div class="col-xs-12 admin"><label class="checkbox"><input type="checkbox" data-ng-model="admin"> Mode admin</label></div>
         </div>
-        
-        <div class="row"></div> 
-        
-        <div class="col-xs-12 admin"><label class="checkbox"><input type="checkbox" data-ng-model="admin"> Mode admin</label></div>
     </body>
 </html>
