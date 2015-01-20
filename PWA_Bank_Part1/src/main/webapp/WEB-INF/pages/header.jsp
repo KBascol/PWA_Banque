@@ -12,6 +12,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Projet PWA</title>
+        <style>
+            li { border: 1px dotted black; }
+            li:nth-of-type(2n+1) { background-color: #9FC1CD; }
+        </style>
     </head>
     <body>
     <jsp:include page="nav.jsp"/>

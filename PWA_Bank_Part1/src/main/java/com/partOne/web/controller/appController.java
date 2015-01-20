@@ -1,8 +1,11 @@
 package com.partOne.web.controller;
 
 import com.partOne.resources.Transaction;
-import com.partOne.resources.TransactionRepository;
+import com.partOne.TransactionDao.TransactionDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class appController {
     
     @Autowired
-    private TransactionRepository transRepo;
+    private TransactionDao transRepo;
                  
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
@@ -41,7 +44,7 @@ public class appController {
  
 	} 
         
-        @RequestMapping(value="/List", method = RequestMethod.GET)
+        @RequestMapping(value="/List")
         public String listPage() {
              
             ModelAndView model = new ModelAndView();

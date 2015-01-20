@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.partOne.resources;
+package com.partOne.TransactionDao;
 
+import com.partOne.resources.Transaction;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public interface TransactionRepository extends PagingAndSortingRepository<Transaction, Long> {
-    
+public interface TransactionDao extends PagingAndSortingRepository<Transaction, Long>{
+
 }
