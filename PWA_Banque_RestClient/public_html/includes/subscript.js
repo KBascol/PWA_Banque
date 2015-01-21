@@ -74,6 +74,17 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
           show: false
         });
         
+        $('#formSub').modal({
+          backdrop: false,
+          keyboard: true,
+          show: false
+        });
+        
+        $('#formProd').modal({
+          backdrop: false,
+          keyboard: true,
+          show: false
+        });
         $scope.products = Prod.query();
 
         $scope.newSub = new Subscription();
@@ -86,6 +97,10 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         };
        
         $scope.sub = new Subscription();
+        
+        $scope.setSub = function (prod) {
+            $scope.prodSub = prod;
+        }
         
         $scope.addSub = function (prod) {
             prod.$addSub($scope.sub);
@@ -111,17 +126,9 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         
         $scope.addOrder = function (prod) {
             $scope.newOrder.sub = $scope.subOrder.name;
-            if($scope.newOrder.firstName === null || $scope.newOrder.lastName === null || $scope.newOrder.email === null || $scope.newOrder.iban === null || $scope.newOrder.sub === null){
-                if (regexEmail.test($scope.newOrder.email)) {
-                    prod.$addOrder($scope.newOrder);
-                }
-                else {
-                    alert("Adresse mail invalide.");
-                }
-            }
-            else{
-                alert("Paramètre manquant");
-            }
+            
+            prod.$addOrder($scope.newOrder);
+            
             $scope.newOrder = new Order();
         };
     }]);
