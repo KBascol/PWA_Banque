@@ -9,9 +9,7 @@
 	<tx:annotation-driven />
 
 	<context:annotation-config /> 
-	
-	<bean
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
 
 	<bean id="jpaAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -39,9 +37,6 @@
 		</property> -->
 	</bean>
 
-	<bean id="bankTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="bankEntityManagerFactory" />
-	</bean>
 
 	<bean id="bankDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">

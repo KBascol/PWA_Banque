@@ -47,63 +47,31 @@ public class Pain008File implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public List<Transaction> getTransaction() {
         return transaction;
-    }
-
-    public void setTransaction(List<Transaction> transaction) {
-        this.transaction = transaction;
     }
 
     public String getMsgId() {
         return msgId;
     }
 
-    public void setMsgId(String msgId) {
-        this.msgId = msgId;
-    }
-
     public String getNameHeader() {
         return nameHeader;
-    }
-
-    public void setNameHeader(String nameHeader) {
-        this.nameHeader = nameHeader;
     }
 
     public String getStreetHeader() {
         return streetHeader;
     }
-
-    public void setStreetHeader(String streetHeader) {
-        this.streetHeader = streetHeader;
-    }
-
+    
     public String getTownHeader() {
         return townHeader;
-    }
-
-    public void setTownHeader(String townHeader) {
-        this.townHeader = townHeader;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

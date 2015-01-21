@@ -8,7 +8,6 @@ package com.partOne.TransactionDao;
 import com.partOne.resources.Transaction;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
-
 /**
  *
  * @author bascool
