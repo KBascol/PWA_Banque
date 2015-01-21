@@ -18,14 +18,23 @@ public class LoginController {
 	public ModelAndView dologin() {
 
 		ModelAndView model = new ModelAndView();
-                model.addObject("message", "Welcome to login page :)\n You need to be log in to acces to this page.");
+                model.addObject("message", "You need to be log in to acces to this page.");
                 model.addObject("login", true);
 		model.setViewName("login");
 		return model;
 
 	}
         
-        	
+        @RequestMapping(value = "/login**", params="error", method = RequestMethod.GET)
+	public ModelAndView doerror() {
+
+		ModelAndView model = new ModelAndView();
+                model.addObject("message", "Username or password error.");
+                model.addObject("login", true);
+		model.setViewName("login");
+		return model;
+
+	}
 	@RequestMapping(value = "/logout**", method = RequestMethod.GET)
 	public ModelAndView dologout() {
 

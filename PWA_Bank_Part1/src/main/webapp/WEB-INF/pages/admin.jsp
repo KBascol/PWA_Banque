@@ -9,12 +9,26 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
 <html>
+    <head>
+        <style>
+            body {
+                background-color: #9FC1CD;
+            }
+            h3 {
+                margin: auto;
+                text-align:center;
+            }
+        </style>
+    </head>
 <body>
-	<h1>Title : ${title}</h1>
-	<h1>Message : ${message}</h1>
+	<h3>Welcome to admin page</h3>
  
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>Welcome | <a href="<c:url value="/logout" />" > Logout</a></h2>  
+
+                <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
+                    <input type="submit" value="Logout" />
+                </form>
+		<h2>Welcome ${pageContext.request.userPrincipal.name}</h2>  
 	</c:if>
 </body>
 </html>
