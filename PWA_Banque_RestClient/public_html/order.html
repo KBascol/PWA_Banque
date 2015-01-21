@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Accueil</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="includes/style.css">
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
+        <script src="includes/subscript.js"></script>
+    </head>
+    <body data-ng-app="PWA_project" data-ng-controller="ordController">
+        <h1 class="text-center"><u>Knk Media</u></h1>
+        
+        <div id="container" class="col-xs-12">
+            <h1>{{ location.search() }}</h1>
+            <ul class="nav nav-tabs nav-justified">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Abonnements</a></li>
+                <li class="active"><a href="order.html">Consulter commande</a></li>
+            </ul>
+            
+            <div class="col-xs-12" data-ng-hide="ordSet">
+                <form name="formNumOrd">
+                    <div class="col-xs-4"><h4><label for="numOrd">Entrez le numero de la commande:</label></h4></div>
+                    <div class="col-xs-4"><input type="text" id="numOrd" name="numOrd" data-ng-model="numOrd" required></div>
+                    <div class="col-xs-4">
+                        <span style="color:red" ng-show="formNumOrd.numOrd.$dirty && formNumOrd.numOrd.$invalid">
+                            <span ng-show="formNumOrd.numOrd.$error.required">Numero manquant.</span>
+                        </span>
+                    </div>
+                </form>
+                <button type="button" class="btn btn-primary" data-ng-click="getOrd()" ng-disabled="formNumOrd.$invalid">Consulter</button>
+            </div>
+            <div class="col-xs-12" data-ng-show="ordSet">
+                <h4>Abonnement {{ order.sub }} de {{ order.prod }}</h4>
+                Commande n°{{ order.orderNum }}, souscrite par {{ order.fName }} {{order.lName}}
+            </div>
+        </div>
+    </body>
+</html>

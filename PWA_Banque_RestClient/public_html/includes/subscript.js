@@ -1,15 +1,4 @@
-var app = angular.module("PWA_project", ["ngResource", "ngRoute"]); 
-
-app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/Produits', {
-            templateUrl: 'products.html',
-            controller: 'prodController'
-        }).when('/Accueil', {
-            templateUrl: 'index.html'
-        }).otherwise({
-            redirectTo: '/Accueil'
-        });
-    }]);
+var app = angular.module("PWA_project", ["ngResource",function($locationProvider){$locationProvider.html5Mode(true);}]); 
 
 app.controller("catController", ['$scope', '$resource', function ($scope, $resource) {     
         var Cat = $resource(
@@ -44,6 +33,7 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
                 {},
                 {
                     query: {method: 'GET', isArray: true},
+                    getOrder: {method: 'GET', params: {mode: 'ord'}},
                     save: {method: 'POST'},
                     addSub: {method: 'PUT', params: {identifiant: '@name', mode: 'add'}},
                     delSub: {method: 'PUT', params: {identifiant: '@name', mode: 'del'}},
@@ -51,8 +41,6 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
                     delete: {method: 'DELETE', params: {identifiant: '@name'}}
                 }
         );
-
-        var regexEmail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
         
         function Subscription() {
             this.name;
@@ -66,6 +54,7 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
             this.email;
             this.iban;
             this.sub;
+            this.prod;
         }
         
         $('#formOrd').modal({
@@ -85,6 +74,7 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
           keyboard: true,
           show: false
         });
+        
         $scope.products = Prod.query();
 
         $scope.newSub = new Subscription();
@@ -92,6 +82,7 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         $scope.addProduct = function () {
             $scope.newProd.$save();
             
+            $('#formProd').modal('hide');
             $scope.newProd = new Prod();
             $scope.newSub = new Subscription();
         };
@@ -100,11 +91,12 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         
         $scope.setSub = function (prod) {
             $scope.prodSub = prod;
-        }
+        };
         
         $scope.addSub = function (prod) {
             prod.$addSub($scope.sub);
             
+            $('#formSub').modal('hide');
             $scope.sub = new Subscription();
         };
         
@@ -126,9 +118,44 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         
         $scope.addOrder = function (prod) {
             $scope.newOrder.sub = $scope.subOrder.name;
+            $scope.newOrder.prod = prod.name;
             
             prod.$addOrder($scope.newOrder);
             
+            $('#formOrd').modal('hide');
             $scope.newOrder = new Order();
+        };
+    }]);
+
+app.controller("ordController", ['$scope', '$resource', '$location', function ($scope, $resource, $location) {
+        var Order = $resource(
+                'http://localhost:8084/PWA_Banque_RestServer/orders/:identifiant',
+                {},
+                {
+                    getOrder: {method: 'GET', params: {identifiant: "@orderNum"}, isArray: true},
+                    query: {method: 'GET', isArray: true}
+                }
+        );
+
+        $scope.ordSet = true;
+        $scope.order = new Order();
+        
+        $scope.toggleSetOrd = function () {
+            $scope.ordSet = !$scope.ordSet;
+        };
+        
+        var params = $location.search();
+        
+        if(params.id !== null){
+            alert(params.id);
+            $scope.order.orderNum = params.id;
+            $scope.order = Order.getOrder();
+            $scope.toggleSetOrd();
+        }
+        
+        $scope.getOrd = function () {
+            $scope.order.orderNum = $scope.numOrd;
+            $scope.order = Order.getOrder();
+            $scope.toggleSetOrd();
         };
     }]);

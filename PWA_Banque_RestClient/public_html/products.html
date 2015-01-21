@@ -24,6 +24,7 @@
             <ul class="nav nav-tabs nav-justified">
                 <li><a href="index.html">Accueil</a></li>
                 <li class="active"><a href="products.html">Abonnements</a></li>
+                <li><a href="order.html">Consulter commande</a></li>
             </ul>
 
             <div>
@@ -34,7 +35,6 @@
                         <option data-ng-repeat="cat in categories" value="{{ cat.name}}">{{ cat.name}}</option>
                     </select>
                 </div>
-                <div class="col-xs-6"> </div>
 
                 <div data-ng-show="admin" class="col-xs-12">
                     <h4>Ajout categorie</h4>          
@@ -46,7 +46,7 @@
                     <div class="col-xs-6"> 
                         <button class="btn btn-default" data-ng-click="addCategory()">ajout</button> 
                     </div>   
-                </div>    
+                </div>         
             </div>
 
             <div class="row"></div> 

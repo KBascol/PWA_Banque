@@ -42,7 +42,7 @@ public class ProductController {
     public Product methodeGetUnElement(@PathVariable("id") String nom) {
         return repo.findOne(nom);
     }
-
+    
     @RequestMapping(method = RequestMethod.POST)
     public void methodePost(@RequestBody @Valid Product newProd) {
         repo.save(newProd);
@@ -66,7 +66,6 @@ public class ProductController {
     
     @RequestMapping(value = "/{id}/ord", method = RequestMethod.PUT)   
     public void addOrder(@PathVariable("id") String nom, Order ord) {
-        System.out.println(ord);
         ordsRepo.save(ord);
     }
 

@@ -32,4 +32,5 @@ public class Order implements Serializable {
     private String iban;
     
     private String sub;
+    private String prod;
 }
