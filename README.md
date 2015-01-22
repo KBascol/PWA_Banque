@@ -16,4 +16,12 @@ La seconde partie correspond à un site d'abonnements. Nous avons choisi de cré
 
 #### Client
 Le client se compose de 3 pages html, 1 page de script et 1 feuille de style.
-+ Les grandes lignes du style (couleurs, cadres,...) sont définies dans la feuille, mais pour tout le reste il y a bootstrap.
+#####Le style
+Les grandes lignes du style (couleurs, cadres,...) sont définies dans la feuille, mais pour tout le reste il y a bootstrap.
+
+#####Les pages html:
+###### index.html 
+
+Cette page statique décrit le site et les abonnements proposés.
+
+###### product.html
