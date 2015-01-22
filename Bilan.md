@@ -28,4 +28,8 @@
 
 ###Difficultés/Remarques
 
++ Que ce soit pour spring security ou aussi pour l'architecture REST, il existe beaucoup de tutoriels mais ils donnent tous des méthodes differentes ce qui peut rapidement compliquer les choses quand on essaye de trouver des solutions à nos problèmes.
++ 
+
 ###Leçons apprises
++ Lorsqu'on tente d'utiliser une technologie inconnu comme spring security, il vaut mieux éviter de multiplier les tutoriel pour se concentrer sur un en particulier et de préférence relativement simple.
