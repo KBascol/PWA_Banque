@@ -8,7 +8,25 @@ La seconde partie correspond à un site d'abonnements. Nous avons choisi de cré
 ----------------------------------------------------------------------------------------------------------
 
 ### Partie 1
-[Spring Security Tutorial](http://www.mkyong.com/tutorials/spring-security-tutorials/)
+Etant donnée que la sécurité + l'affichage était pratiquement impossible a faire nous avons fait le choix de séparer la parte I en 2 sous partie.
+Une partie avec la sécurité l'autre avec l'affichage seulement.
+
+#### Partie Securisée
+La partie sécurisée se compose en plusieurs partie. Les configurations de sécurité; les pages jsp et les controlleurs.
+
+##### Configuration
+###### mvc-dispatcher-servlet.xml
+Cette page sert juste à faire correspondre les pages du type /Liste vers la sp associée, celle ci étant retournée par le controller. Les pages sont alors cherchée dans /WEB-INF/Pages puis l'extension est ajoutée.
+
+###### spring-security.xml
+Cette configuration contiens la liste des comptes et leurs autorisation. L'utilisateur Admin à accès à toutes les pages. User à accès a accès juste a la page Research.
+Elle contient également la redirection en cas d'essai d'accès aux pages sécurisée et la redirection en cas de déconnexion.
+
+##### Les Controlleurs
+###### Les controlleurs sont juste la pour rediriger l'utilisateur vers les jsp associées.
+
+#### Partie Non sécurisée
+Cette partie ne marche pas pour des raisons très obsure, cependant toutes les pages sont prete en cas de débug.
 
 -----------------------------------------------------------------------------------------------------------
 
