@@ -13,8 +13,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author nicolas
+ */
 @Entity
-@Table(name="transaction")
+@Table(name="Transaction")
 public class Transaction implements Serializable {
 
     /**

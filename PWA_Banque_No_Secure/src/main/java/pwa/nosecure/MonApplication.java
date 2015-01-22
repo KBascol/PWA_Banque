@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  *
- * @author root
+ * @author nicolas
  */
 @Configuration
 @EnableAutoConfiguration

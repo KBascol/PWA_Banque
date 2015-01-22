@@ -18,10 +18,10 @@ import javax.persistence.Table;
 
 /**
  *
- * @author kevin
+ * @author nicolas
  */
 @Entity
-@Table(name="pain008file")
+@Table(name="Pain008File")
 public class Pain008File implements Serializable {
 
     private static final long serialVersionUID = 1L;

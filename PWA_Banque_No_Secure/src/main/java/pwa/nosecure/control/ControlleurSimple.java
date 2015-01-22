@@ -23,7 +23,6 @@ public class ControlleurSimple {
     @RequestMapping("/Liste")
     public String DisplayListTrans() {
         ModelAndView model = new ModelAndView();
-
         model.addObject("transactions", transRepo.findAll());
         return "listTrans";
     }
