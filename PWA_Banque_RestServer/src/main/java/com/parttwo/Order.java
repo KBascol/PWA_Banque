@@ -33,4 +33,12 @@ public class Order implements Serializable {
     
     private String sub;
     private String prod;
+
+    public String mail() {
+        return "Cher(e) " + firstName + " " + lastName +".\n"
+                + "Votre souscription à l'abonnement " + sub + " de " + prod + " est confirmée.\n"
+                + "Votre numero de commande est " + orderNum + ", Le prélevement s'effectuera sur " + iban +".\n"
+                + "Lien vers le resumé http://localhost:8383/PWA_Banque_RestClient/order.html?id=" + orderNum + " .\n\n"
+                + "KNK Multimedia.";
+    }
 }

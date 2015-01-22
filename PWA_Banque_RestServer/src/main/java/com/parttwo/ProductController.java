@@ -6,7 +6,13 @@
 package com.parttwo;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.validation.Valid;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +38,8 @@ public class ProductController {
     
     @Autowired
     OrderRepo ordsRepo;
+    
+    AutoMail mail = new AutoMail("auto.mail.projet","k.b.a.m.p");
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> methodeGet() {
@@ -64,9 +72,10 @@ public class ProductController {
         subsRepo.delete(sub);
     }
     
-    @RequestMapping(value = "/{id}/ord", method = RequestMethod.PUT)   
+    @RequestMapping(value = "/{id}/ord", method = RequestMethod.PUT)
     public void addOrder(@PathVariable("id") String nom, Order ord) {
         ordsRepo.save(ord);
+        mail.sendOrder(ord);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
