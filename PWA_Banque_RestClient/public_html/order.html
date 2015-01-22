@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Accueil</title>
+        <title>Commande</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -15,7 +15,7 @@
         <script src="includes/subscript.js"></script>
     </head>
     <body data-ng-app="PWA_project">
-        <h1 class="text-center"><u>Knk Media</u></h1>
+        <h1 class="text-center"><u>Knk Multimedia</u></h1>
         
         <div id="container" class="col-xs-12" data-ng-controller="ordController">
             <ul class="nav nav-tabs nav-justified">
@@ -38,12 +38,15 @@
                     <button type="button" class="btn btn-primary" data-ng-click="getOrd()" ng-disabled="formNumOrd.$invalid">Consulter</button>
                 </div>
                 <div class="col-xs-12" data-ng-show="ordSet">
-                    <h4>Abonnement {{ order.sub }} de {{ order.prod }}</h4>
-                    <p>
-                        Commande n°{{ order.orderNum }}, souscrite par {{ order.firstName }} {{order.lastName}}.<br>
-                        Adresse mail utilisée: {{ order.email }} .
-                    </p>
-
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+                        <h4>Abonnement {{ order.sub }} de {{ order.prod }}</h4>
+                        <p>
+                            Commande n°{{ order.orderNum }}, souscrite par {{ order.firstName }} {{order.lastName}}.<br>
+                            Adresse mail utilisée: {{ order.email }} .
+                        </p>
+                    </div>
+                    <div class="col-xs-4"></div>
                 </div>
             </div>
 
