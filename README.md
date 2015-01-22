@@ -20,8 +20,24 @@ Le client se compose de 3 pages html, 1 page de script et 1 feuille de style.
 Les grandes lignes du style (couleurs, cadres,...) sont définies dans la feuille, mais pour tout le reste il y a bootstrap.
 
 #####Les pages html:
-###### index.html 
-
+###### index.html
 Cette page statique décrit le site et les abonnements proposés.
 
-###### product.html
+###### products.html
+Cette page est la principale du site. Elle regroupe la liste des produits, leurs abonnements et le filtre des catégories. Elle fournit aussi les fonctionnalités d'administration des données et de souscription aux abonnements.
+
+###### order.html
+Cette page permet l'affichage du résumé d'une souscription. Le résumé est accessible grace au numéro de la commande qui peut etre utilisé dans l'url (lien envoyé par mail) ou dans un champ texte sur la même page.
+
+#####Le script
+L'application angularjs utilisée se compose de 3 controlleur.
+######catController
+Controlleur gérant les accès et les ajouts des catégories
+
+######prodController
+Controlleur gérant les accès, ajouts et supressions des produits, de leurs abonnements. Il gère aussi la création de commande.
+
+######ordController
+Controlleur gérant les accès aux archives des commandes.
+
+
