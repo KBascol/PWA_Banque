@@ -8,8 +8,7 @@ package com.parttwo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- *
- * @author Kevin
+ * JPA Repository of Subscription.
  */
 public interface SubscriptionRepo extends JpaRepository<Subscription, String> {
     

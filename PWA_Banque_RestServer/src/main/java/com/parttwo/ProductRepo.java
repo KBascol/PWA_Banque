@@ -8,8 +8,7 @@ package com.parttwo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- *
- * @author Kevin
+ * JPA Repository of Product.
  */
 public interface ProductRepo  extends JpaRepository<Product, String> {
     

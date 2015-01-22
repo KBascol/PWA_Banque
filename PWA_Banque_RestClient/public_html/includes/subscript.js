@@ -1,5 +1,8 @@
 var app = angular.module("PWA_project", ["ngResource",function($locationProvider){$locationProvider.html5Mode(true);}]); 
 
+/*
+ * Controller to manage the resource and method for the categories.
+ */
 app.controller("catController", ['$scope', '$resource', function ($scope, $resource) {     
         var Cat = $resource(
                 'http://localhost:8084/PWA_Banque_RestServer/categories/:identifiant',
@@ -27,6 +30,10 @@ app.controller("catController", ['$scope', '$resource', function ($scope, $resou
         };   
 }]);
 
+/*
+ * Controller to manage the resource and method for the products and their subscriptions.
+ *  And also to consider an Order.
+ */
 app.controller("prodController", ['$scope', '$resource', function ($scope, $resource) {
         var Prod = $resource(
                 'http://localhost:8084/PWA_Banque_RestServer/products/:identifiant/:mode',
@@ -57,18 +64,27 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
             this.prod;
         }
         
+        /*
+         * Configuration for the popup orders' form.
+         */
         $('#formOrd').modal({
           backdrop: false,
           keyboard: true,
           show: false
         });
         
+        /*
+         * Configuration for the popup subscriptions' adding form.
+         */      
         $('#formSub').modal({
           backdrop: false,
           keyboard: true,
           show: false
         });
         
+        /*
+         * Configuration for the popup products' adding form.
+         */
         $('#formProd').modal({
           backdrop: false,
           keyboard: true,
@@ -127,6 +143,9 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
         };
     }]);
 
+/*
+ * Contoller to manage the access to the Orders in the DB.
+ */
 app.controller("ordController", ['$scope', '$resource', '$location', function ($scope, $resource, $location) {
         var Order = $resource(
                 'http://localhost:8084/PWA_Banque_RestServer/orders/:id',

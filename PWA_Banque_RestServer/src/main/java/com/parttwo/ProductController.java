@@ -17,64 +17,106 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
- * @author Kevin
+ * Controller managing all the methods (adding, deleting, accessing) for the products and their subscriptions.
+ * It manage also the subscribing.
  */
 
 @RequestMapping("/products")
 @RestController
 public class ProductController {
+    /**
+     * Products' JPARepository.
+     */
     @Autowired
     ProductRepo repo;
     
+    /**
+     * Subscriptions' JPARepository.
+     */
     @Autowired
     SubscriptionRepo subsRepo;
     
+    /**
+     * Orders' JPARepository.
+     */
     @Autowired
     OrderRepo ordsRepo;
     
     AutoMail mail = new AutoMail("auto.mail.projet","k.b.a.m.p");
 
+    /**
+     * Method to display all the products in the BD.
+     * @return List of Product
+     */
     @RequestMapping(method = RequestMethod.GET)
-    public List<Product> methodeGet() {
+    public List<Product> methodGet() {
         return repo.findAll();
     }
-
+    
+    /**
+     * Method to display the Product of name "name".
+     * @param name
+     * @return Product
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Product methodeGetUnElement(@PathVariable("id") String nom) {
-        return repo.findOne(nom);
+    public Product methodGetAnElement(@PathVariable("id") String name) {
+        return repo.findOne(name);
     }
     
+    /**
+     * Method to add the Porduct newProd.
+     * @param newProd 
+     */
     @RequestMapping(method = RequestMethod.POST)
-    public void methodePost(@RequestBody @Valid Product newProd) {
+    public void methodPost(@RequestBody @Valid Product newProd) {
         repo.save(newProd);
     }
 
+    /**
+     * Method to add the Subscription sub to the Product of name "name"
+     * @param name
+     * @param sub 
+     */
     @RequestMapping(value = "/{id}/add", method = RequestMethod.PUT)
-    public void addSub(@PathVariable("id") String nom, Subscription sub) {
-        Product prod = repo.findOne(nom);
+    public void addSub(@PathVariable("id") String name, Subscription sub) {
+        Product prod = repo.findOne(name);
         subsRepo.save(sub);
         prod.getSubs().add(sub);
         repo.save(prod);
     }
     
+    /**
+     * Method to delete the Subscription sub to the Product of name "name"
+     * @param name
+     * @param sub 
+     */
     @RequestMapping(value = "/{id}/del", method = RequestMethod.PUT)   
-    public void delSub(@PathVariable("id") String nom, Subscription sub) {
-        Product prod = repo.findOne(nom);
+    public void delSub(@PathVariable("id") String name, Subscription sub) {
+        Product prod = repo.findOne(name);
         prod.getSubs().remove(sub);
         repo.save(prod);
         subsRepo.delete(sub);
     }
     
+    /**
+     * Method to consider the Order ord of the Product of name "name"
+     * @param name
+     * @param ord 
+     */
     @RequestMapping(value = "/{id}/ord", method = RequestMethod.PUT)
-    public void addOrder(@PathVariable("id") String nom, Order ord) {
+    public void addOrder(@PathVariable("id") String name, Order ord) {
         ordsRepo.save(ord);
         mail.sendOrder(ord);
     }
 
+    /**
+     * method to delete the Product of name "name"
+     * @param name
+     * @return ResponseEntity
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Boolean> methodeDelete(@PathVariable("id") String nom) {
-        repo.delete(nom);
+    public ResponseEntity<Boolean> methodeDelete(@PathVariable("id") String name) {
+        repo.delete(name);
         return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
     }  
 }

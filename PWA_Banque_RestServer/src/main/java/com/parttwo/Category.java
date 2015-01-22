@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import lombok.Data;
 
 /**
- *
- * @author bascool
+ * Categories' entity.
  */
 
 @Entity
