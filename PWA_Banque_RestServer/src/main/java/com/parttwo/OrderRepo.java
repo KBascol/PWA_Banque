@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Kevin
  */
-public interface OrderRepo  extends JpaRepository<Order, String>  {
+public interface OrderRepo  extends JpaRepository<Order, Integer>  {
     
 }

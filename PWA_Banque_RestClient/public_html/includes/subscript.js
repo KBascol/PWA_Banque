@@ -129,16 +129,15 @@ app.controller("prodController", ['$scope', '$resource', function ($scope, $reso
 
 app.controller("ordController", ['$scope', '$resource', '$location', function ($scope, $resource, $location) {
         var Order = $resource(
-                'http://localhost:8084/PWA_Banque_RestServer/orders/:identifiant',
+                'http://localhost:8084/PWA_Banque_RestServer/orders/:id',
                 {},
                 {
-                    getOrder: {method: 'GET', params: {identifiant: "@orderNum"}, isArray: true},
-                    query: {method: 'GET', isArray: true}
+                    getOrder: {method: 'GET', params: {id: '@orderNum'}, isArray: false}
                 }
         );
 
-        $scope.ordSet = true;
-        $scope.order = new Order();
+        $scope.ordSet = false;
+        $scope.order = Order.getOrder({id:-1});
         
         $scope.toggleSetOrd = function () {
             $scope.ordSet = !$scope.ordSet;
@@ -146,16 +145,13 @@ app.controller("ordController", ['$scope', '$resource', '$location', function ($
         
         var params = $location.search();
         
-        if(params.id !== null){
-            alert(params.id);
-            $scope.order.orderNum = params.id;
-            $scope.order = Order.getOrder();
+        if(params.id >= 0){
             $scope.toggleSetOrd();
+            $scope.order = Order.getOrder({id:params.id});
         }
         
         $scope.getOrd = function () {
-            $scope.order.orderNum = $scope.numOrd;
-            $scope.order = Order.getOrder();
+            $scope.order = Order.getOrder({id:$scope.numOrd});
             $scope.toggleSetOrd();
         };
     }]);

@@ -24,10 +24,10 @@ import lombok.Data;
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int orderNum;
+    private Integer orderNum;
     
-    private String FirstName;
-    private String LastName;
+    private String firstName;
+    private String lastName;
     private String email;
     private String iban;
     

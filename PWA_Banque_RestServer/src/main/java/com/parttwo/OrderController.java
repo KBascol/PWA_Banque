@@ -29,7 +29,7 @@ public class OrderController {
         return repo.findAll();
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)   
-    public void getOrder(@PathVariable("id") String nom) {
-        repo.findOne(nom);
+    public Order getOrder(@PathVariable("id") String nom) {
+        return repo.findOne(Integer.parseInt(nom));
     }
 }
