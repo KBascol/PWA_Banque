@@ -13,8 +13,7 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
 /**
- *
- * @author Kevin
+ * Class managing the sending of the confimations mails.
  */
 
 public class AutoMail {
@@ -25,7 +24,11 @@ public class AutoMail {
         this.user = user;
         this.pass = pass;
     }
-
+    
+    /**
+     * Method to send the confirmation for the order ord.
+     * @param ord 
+     */
     public void sendOrder(Order ord){      
         Email email = new SimpleEmail();
         email.setHostName("smtp.gmail.com");

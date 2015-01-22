@@ -8,8 +8,7 @@ import javax.persistence.OneToMany;
 import lombok.Data;
 
 /**
- *
- * @author Kevin
+ * Products' entity
  */
 
 @Entity

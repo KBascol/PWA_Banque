@@ -8,8 +8,7 @@ package com.parttwo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- *
- * @author Kevin
+ * JPA Repository of Order.
  */
 public interface OrderRepo  extends JpaRepository<Order, Integer>  {
     

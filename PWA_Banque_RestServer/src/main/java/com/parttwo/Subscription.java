@@ -5,19 +5,19 @@
  */
 package com.parttwo;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.Data;
 
 
 /**
- *
- * @author bascool
+ * Subscriptions' entity
  */
 
 @Entity
 @Data
-public class Subscription {
+public class Subscription implements Serializable {
     @Id
     private String name;
 

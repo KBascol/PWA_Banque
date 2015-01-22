@@ -14,8 +14,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 /**
- *
- * @author Kevin
+ * Orders' entity.
  */
 @Entity
 @Data
@@ -33,6 +32,10 @@ public class Order implements Serializable {
     private String sub;
     private String prod;
 
+    /**
+     * Method to set a confirmation mail.
+     * @return mail (String)
+     */
     public String mail() {
         return "Cher(e) " + firstName + " " + lastName +".\n"
                 + "Votre souscription à l'abonnement " + sub + " de " + prod + " est confirmée.\n"

@@ -10,6 +10,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
+/**
+ * Configuration class for REST's architecture.
+ */
 
 @Component
 public class SimpleCORSFilter implements Filter {
