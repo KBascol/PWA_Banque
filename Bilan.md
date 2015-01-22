@@ -19,6 +19,7 @@
 ####Partie 1
 + Affichage de la liste des transactions
   + Recherche sur la liste des transaction
++ PagingAndSorting
 
 ####Partie 2
 + Les catégories phares du moments sont implémentée statiquement.
