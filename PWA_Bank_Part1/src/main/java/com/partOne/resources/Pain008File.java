@@ -14,12 +14,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
- * @author kaldoran
+ * @author nicolas
  */
 @Entity
+@Table(name="Pain008File")
 public class Pain008File implements Serializable {
 
     private static final long serialVersionUID = 1L;

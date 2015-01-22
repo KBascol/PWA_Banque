@@ -10,7 +10,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 /**
  *
- * @author bascool
+ * @author nciolas
  */
 
 @Service

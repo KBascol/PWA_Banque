@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author kaldoran
+ * @author nicolas
  */
 
 @Controller

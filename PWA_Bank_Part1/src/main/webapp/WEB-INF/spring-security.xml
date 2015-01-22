@@ -12,7 +12,7 @@
 	<http auto-config="true">
 		<intercept-url pattern="/admin**" access="ROLE_ADMIN" />
                 <intercept-url pattern="/List" access="ROLE_ADMIN" />
-                <intercept-url pattern="/user**" access="ROLE_USER" />
+                <intercept-url pattern="/Research**" access="ROLE_USER" />
                 <form-login login-page="/login" 
                             default-target-url="/welcome" 
                             authentication-failure-url="/login?error" 
@@ -25,7 +25,7 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
+				<user name="admin" password="admin" authorities="ROLE_ADMIN, ROLE_USER" />
 				<user name="user" password="admin" authorities="ROLE_USER" />
 			</user-service>
 		</authentication-provider>

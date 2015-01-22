@@ -8,14 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 /**
  *
- * @author kaldoran
+ * @author nicolas
  */
 
 @Entity
+@Table(name="Transaction")
 public class Transaction implements Serializable {
 
     /**
