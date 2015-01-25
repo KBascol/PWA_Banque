@@ -7,8 +7,6 @@
 <%@page session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="header.jsp"/>
-
 <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
     <input type="submit" value="Logout" />
 </form>
